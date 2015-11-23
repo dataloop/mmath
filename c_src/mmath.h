@@ -1,5 +1,15 @@
-#ifdef SOLARIS
-#include <sys/byteorder.h>
+#if defined(__linux__)
+#  define __USE_BSD
+#  include <stdint.h>
+#  include <endian.h>
+#  define htonll(v) htobe64(v)
+#  define ntohll(v) be64toh(v)
+#elif defined(__APPLE__)
+#  include <libkern/OSByteOrder.h>
+#  define htonll(v) OSSwapHostToBigInt64(v)
+#  define ntohll(v) OSSwapBigToHostInt64(v)
+#elif defined(SOLARIS)
+#  include <sys/byteorder.h>
 #endif
 
 #define IS_SET(v) ((v & 0x00000000000000FFLL) != 0)
