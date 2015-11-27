@@ -1,6 +1,7 @@
 # mmath
 
 [![Build Status](https://jenkins.dataloop.io/job/mmath/badge/icon)](https://jenkins.dataloop.io/job/mmath/)
+[![Build Status](https://jenkins.dataloop.io/buildStatus/icon?job=mmath)](https://jenkins.dataloop.io/job/mmath/)
 
 A library for performaing math on number 'arrays' in binaries.
 
