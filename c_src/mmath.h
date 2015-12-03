@@ -38,8 +38,8 @@ typedef struct {
   vs = (__typeof__(vs)) bin.data
 
 
-ErlNifSInt64 dec_serialize(decimal v);
-decimal dec_deserialize(ErlNifSInt64 v);
+int64_t dec_serialize(decimal v);
+decimal dec_deserialize(int64_t v);
 
 decimal dec_from_int64(int64_t v);
 decimal dec_from_double(double v);

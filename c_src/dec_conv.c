@@ -51,7 +51,7 @@ qpow10(int8_t v) {
   return t[(uint8_t)v];
 }
 
-ErlNifSInt64
+int64_t
 dec_serialize(decimal v) {
   return htonll((! v.exponent) ?
                 ((v.coefficient & 0x00FFFFFFFFFFFFFFLL) | 0x0100000000000000LL) :
@@ -62,7 +62,7 @@ dec_serialize(decimal v) {
 }
 
 decimal
-dec_deserialize(ErlNifSInt64 ev) {
+dec_deserialize(int64_t ev) {
   decimal d;
   int64_t v = ntohll(ev);
   char type = (uint8_t)((v & TYPE_MASK) >> 56);
@@ -107,7 +107,7 @@ dec_from_double(double v) {
 }
 
 int64_t dec_to_int64(decimal v) {
-  return v.coefficient * qpow10(v.exponent);
+  return v.coefficient * (int64_t)qpow10(v.exponent);
 }
 
 // Not advised conversion, that will loose precision
