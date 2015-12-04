@@ -1,24 +1,16 @@
 #include <stdio.h>
 
-#include "cutest/cutest.h"
+#include "seatest/seatest.h"
 
 // TODO: consider converting to some simpler framework, maybe minunit
 
-CuSuite* get_dec_math_suite();
-void run_all_tests();
+void dec_math_tests();
+void all_tests();
 
-void run_all_tests() {
-  CuString *output = CuStringNew();
-  CuSuite* suite = CuSuiteNew();
-
-  CuSuiteAddSuite(suite, get_dec_math_suite());
-
-  CuSuiteRun(suite);
-  CuSuiteSummary(suite, output);
-  CuSuiteDetails(suite, output);
-  printf("%s\n", output->buffer);
+void all_tests() {
+  dec_math_tests();
 }
 
-int main(void) {
-  run_all_tests();
+int main(int argc, char** argv) {
+  run_tests(all_tests);
 }
