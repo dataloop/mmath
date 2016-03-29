@@ -29,6 +29,14 @@ void test_adding_with_overflow () {
   assert_int_equal(-13, sum.exponent);
 }
 
+void test_adding_negative_float() {
+  decimal a = {.coefficient = -99452189536800, .exponent = -14};
+  decimal b = {.coefficient = -1, .exponent = 0};
+  decimal sum = dec_add(a, b);
+  assert_long_equal(-19945218953680, sum.coefficient);
+  assert_int_equal(-13, sum.exponent);
+}
+
 void test_dividing () {
   decimal a = {.coefficient = 18600000000000, .exponent = -13};
   decimal r = dec_div(a, 2);
@@ -43,6 +51,7 @@ void dec_math_tests() {
   run_test(test_adding_simple_intergers);
   run_test(test_adding_floats);
   run_test(test_adding_with_overflow);
+  run_test(test_adding_negative_float);
   run_test(test_dividing);
   test_fixture_end();
 }
