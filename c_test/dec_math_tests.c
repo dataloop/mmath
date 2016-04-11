@@ -37,6 +37,33 @@ void test_adding_negative_float() {
   assert_int_equal(-13, sum.exponent);
 }
 
+void test_adding_int_to_negative_float () {
+  decimal a = {.coefficient = -10000000000000, .exponent = -13};
+  decimal b = {.coefficient = 2, .exponent = 0};
+  decimal sum = dec_add(a, b);
+  assert_ulong_equal(10000000000000, sum.coefficient);
+  assert_int_equal(-13, sum.exponent);
+}
+
+void test_adding_float_to_zero () {
+  decimal a = {.coefficient = 0, .exponent = 0};
+  decimal b = {.coefficient = 10000000000000, .exponent = -14};
+  decimal sum = dec_add(a, b);
+  assert_ulong_equal(10000000000000, sum.coefficient);
+  assert_int_equal(-14, sum.exponent);
+}
+
+void test_adding_int_to_float () {
+  decimal a = {.coefficient = 100000000000000, .exponent = -14};
+  decimal b = {.coefficient = 14073, .exponent = 0};
+  decimal sum = dec_add(a, b);
+  assert_ulong_equal(140740000000000, sum.coefficient);
+  assert_int_equal(-10, sum.exponent);
+}
+
+//
+// dec_div_tests
+//
 void test_dividing () {
   decimal a = {.coefficient = 18600000000000, .exponent = -13};
   decimal r = dec_div(a, 2);
@@ -44,14 +71,15 @@ void test_dividing () {
   assert_int_equal(-13, r.exponent);
 }
 
-
-
 void dec_math_tests() {
   test_fixture_start();
   run_test(test_adding_simple_intergers);
   run_test(test_adding_floats);
   run_test(test_adding_with_overflow);
   run_test(test_adding_negative_float);
+  run_test(test_adding_int_to_negative_float);
+  run_test(test_adding_float_to_zero);
+  run_test(test_adding_int_to_float);
   run_test(test_dividing);
   test_fixture_end();
 }
