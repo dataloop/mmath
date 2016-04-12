@@ -61,6 +61,14 @@ void test_adding_int_to_float () {
   assert_int_equal(-10, sum.exponent);
 }
 
+void test_adding_int_to_negative_float_with_overflow () {
+  decimal a = {.coefficient = -10000000000000, .exponent = -13};
+  decimal b = {.coefficient = 128, .exponent = 0};
+  decimal sum = dec_add(a, b);
+  assert_long_equal(12700000000000, sum.coefficient);
+  assert_int_equal(-11, sum.exponent);
+}
+
 //
 // dec_div_tests
 //
@@ -80,6 +88,7 @@ void dec_math_tests() {
   run_test(test_adding_int_to_negative_float);
   run_test(test_adding_float_to_zero);
   run_test(test_adding_int_to_float);
+  run_test(test_adding_int_to_negative_float_with_overflow);
   run_test(test_dividing);
   test_fixture_end();
 }
