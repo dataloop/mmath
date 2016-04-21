@@ -167,6 +167,13 @@ void seatest_assert_long_equal(long expected, long actual, const char* function,
 	seatest_simple_test_result(expected==actual, s, function, line);	
 }
 
+void seatest_assert_long_hex_equal(long expected, long actual, const char* function, unsigned int line)
+{
+	char s[SEATEST_PRINT_BUFFER_SIZE];
+	sprintf(s, "Expected %lx but was %lx", expected, actual);
+	seatest_simple_test_result(expected==actual, s, function, line);	
+}
+
 void seatest_assert_ulong_equal(unsigned long expected, unsigned long actual, const char* function, unsigned int line)
 {
 	char s[SEATEST_PRINT_BUFFER_SIZE];
